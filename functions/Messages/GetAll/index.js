@@ -2,6 +2,12 @@ const {agent} = require('../../../utils/db/agent');
 const response = require('../../../responses/handler');
 
 exports.handler = async (event) => {
-    return response.Success('Successfully called the GET ALL API');
+
+    const data = await agent.messages.getAll();
+
+    if(data)
+        return response.Success(data);
+
+    return response.NotFound('No messages found');
 
 };

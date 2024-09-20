@@ -13,14 +13,16 @@ const messages = {
         ExpressionAttributeValues: {
             ':pk': 'message',
         },
-    }),
+    }).then(res => res.Items).catch(e => e),
+
     getById: async (id) => await db.get({
         TableName: 'shui-message-board-db',
 		Key: {
             pk:'message',
             id: id
         }
-    }),
+    }).then(res => res.Item).catch(e => e),
+
     create: async (data) => await db.put({
         TableName: 'shui-message-board-db',
         Item: {
@@ -32,10 +34,12 @@ const messages = {
             ...data
         }
     }),
+
     update: async (id, data) => await db.put({
         TableName:'shui-message-board-db',
         Item: data
     }),
+
     deleteById: async (id) => await db.delete({
         TableName:'shui-message-board-db',
         Key: {
