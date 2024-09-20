@@ -18,15 +18,40 @@ build:
     minify: true
 
 functions:
-  hello:
-    handler: handler.hello
+  GetAll:
+    handler: functions/Messages/GetAll/index.handler
     events:
       - httpApi:
-          path: /
+          path: /messages
           method: get
+  GetById:
+    handler: functions/Messages/GetById/index.handler
+    events:
+      - httpApi:
+          path: /messages/{id}
+          method: get
+  Create:
+    handler: functions/Messages/Create/index.handler
+    events:
+      - httpApi:
+          path: /messages
+          method: post
+  Update:
+    handler: functions/Messages/Update/index.handler
+    events:
+      - httpApi:
+          path: /messages/{id}
+          method: put
+  DeleteById:
+    handler: functions/Messages/DeleteById/index.handler
+    events:
+      - httpApi:
+          path: /messages/{id}
+          method: delete
+
 resources:
   Resources:
-    EventTable:
+    MessageTable:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${file(./local.yml):dbTable}
