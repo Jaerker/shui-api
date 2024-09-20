@@ -2,6 +2,13 @@ const {agent} = require('../../../utils/db/agent');
 const response = require('../../../responses/handler');
 
 exports.handler = async (event) => {
-    return response.Success('Successfully called the DELETE API');
+    try{
+        const {id} = event.pathParameters;
+        await agent.messages.deleteById(id);
+         
+        return response.Success('Message successfully deleted.');
+    }catch(e){
+        return response.Error(e);
+    }
 
 };

@@ -7,16 +7,12 @@ exports.handler = async (event) => {
         const data = JSON.parse(event.body);
 
         if(data){
-            const res = await agent.messages.create(data);
+            await agent.messages.create(data);
             
-            if(res['$metadata'].httpStatusCode === '200')
-                return response.Success('Successfully created message');
-            return response.Error(res);
+            return response.Success('Message successfully created.');
         }
-    
-    
         return response.NotFound('No data in body');
     }catch(e){
-        return response.Error(e)
+        return response.Error(e);
     }
 };

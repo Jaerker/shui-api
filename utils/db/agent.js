@@ -15,13 +15,20 @@ const messages = {
         },
     }).then(res => res.Items).catch(e => e),
 
-    getById: async (id) => await db.get({
-        TableName: 'shui-message-board-db',
-		Key: {
-            pk:'message',
-            id: id
+    getById: async (id) => {
+        try{
+            const {Item} = await db.get({
+                TableName: 'shui-message-board-db',
+                Key: {
+                    pk:'message',
+                    id: id
+                }
+            });
+            return Item;
+        }catch(e){
+           return null;
         }
-    }).then(res => res.Item).catch(e => e),
+    },
 
     create: async (data) => await db.put({
         TableName: 'shui-message-board-db',

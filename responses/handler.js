@@ -7,6 +7,13 @@ const Success = (data) => {
 
 const Error = (message) => {
     return {
+        statusCode: 500,
+        errorMessage: message ? message : 'Internal Error'
+    }
+}
+
+const BadRequest = (message) => {
+    return {
         statusCode: 400,
         errorMessage: message ? message : 'Bad Request'
     }
