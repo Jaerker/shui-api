@@ -42,7 +42,7 @@ const messages = {
         }
     }),
 
-    update: async (id, data) => await db.put({
+    update: async (data) => await db.put({
         TableName:'shui-message-board-db',
         Item: data
     }),
